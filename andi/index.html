@@ -25,9 +25,10 @@
             bannerNode.parentNode.removeChild(bannerNode);
         }
 
+        let lastMedia = null; // Speichern des zuletzt abgespielten Medien-Paares
+
         // Zufälliges Video und Audio auswählen
         function setRandomMedia() {
-            // Array mit den möglichen Ordnern für Videos und Audios
             const mediaFolder = 'andi/media/';
 
             const mediaList = [
@@ -36,8 +37,14 @@
                 { video: 'lied3/video.mp4', audio: 'lied3/audio.mp3' }
             ];
 
-            // Zufälligen Index auswählen
-            const randomMedia = mediaList[Math.floor(Math.random() * mediaList.length)];
+            // Zufälligen Index wählen, aber sicherstellen, dass es nicht das gleiche Paar wie das letzte ist
+            let randomMedia;
+            do {
+                randomMedia = mediaList[Math.floor(Math.random() * mediaList.length)];
+            } while (lastMedia && randomMedia.video === lastMedia.video && randomMedia.audio === lastMedia.audio);
+
+            // Speichern des aktuellen Medien-Paares
+            lastMedia = randomMedia;
 
             // Video und Audio auf die zufällige Quelle setzen
             document.querySelector('.bg-video source').src = mediaFolder + randomMedia.video;
@@ -136,4 +143,5 @@
     </script>
 
 </body>
+
 </html>
