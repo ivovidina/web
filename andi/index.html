@@ -24,6 +24,34 @@
             let bannerNode = document.querySelector('[alt="www.000webhost.com"]').parentNode.parentNode;
             bannerNode.parentNode.removeChild(bannerNode);
         }
+
+        // Zufälliges Video und Audio auswählen
+        function setRandomMedia() {
+            // Array mit den möglichen Ordnern für Videos und Audios
+            const mediaFolder = 'andi/media/';
+
+            const mediaList = [
+                { video: 'lied1/video.mp4', audio: 'lied1/audio.mp3' },
+                { video: 'lied2/video.mp4', audio: 'lied2/audio.mp3' },
+                { video: 'lied3/video.mp4', audio: 'lied3/audio.mp3' }
+            ];
+
+            // Zufälligen Index auswählen
+            const randomMedia = mediaList[Math.floor(Math.random() * mediaList.length)];
+
+            // Video und Audio auf die zufällige Quelle setzen
+            document.querySelector('.bg-video source').src = mediaFolder + randomMedia.video;
+            document.getElementById('audio').querySelector('source').src = mediaFolder + randomMedia.audio;
+
+            // Die Quellen neu laden
+            document.querySelector('.bg-video').load();
+            document.getElementById('audio').load();
+            document.getElementById('audio').play();  // Audio starten
+        }
+
+        function audioPlay() {
+            setRandomMedia();  // Zufälliges Video und Audio setzen
+        }
     </script>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
@@ -51,12 +79,14 @@
             </label>
         </div>
     </div>
+    <!-- Hintergrundvideo und Audio-Player, die beim Klick aktualisiert werden -->
     <video autoplay loop muted webkit-playsinline playsinline class="fullscreen bg-video">
         <source src="solar.mp4" type="video/mp4">
     </video>
     <audio id="audio" loop preload="auto">
         <source src="wo_ist_das_acid.mp3" type="audio/mp3">
     </audio>
+
     <div class="snowflakes">
         <div class="snowflake">♰</div>
         <div class="snowflake">♰</div>
@@ -69,6 +99,7 @@
         <div class="snowflake">♰</div>
         <div class="snowflake">♰</div>
     </div>
+
     <div id="center">
         <div>
             <h1>
@@ -89,20 +120,20 @@
             </a>
         </div>
     </div>
-</body>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        new Typed('#bio', {
-            strings: ["Echter Betrügerarsch", "Eleganter Stratege", "#31#", "bundeskriminalamt.cc", "0x7d29e7"], 
-            typeSpeed: 50,
-            backSpeed: 25,
-            loop: true,
-            showCursor: false,
-            cursorChar: '|',
-            autoInsertCss: true
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            new Typed('#bio', {
+                strings: ["Echter Betrügerarsch", "Eleganter Stratege", "#31#", "bundeskriminalamt.cc", "0x7d29e7"], 
+                typeSpeed: 50,
+                backSpeed: 25,
+                loop: true,
+                showCursor: false,
+                cursorChar: '|',
+                autoInsertCss: true
+            });
         });
-    });
-</script>
+    </script>
 
+</body>
 </html>
